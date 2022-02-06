@@ -2,8 +2,8 @@ import React from "react";
 import Button from '@mui/material/Button';
 import TextField from '@mui/material/TextField';
 import {app} from "./firebase-config";
-import { borderRadius, Box, display, flexbox, maxWidth, minWidth, padding } from "@mui/system";
-import { YouTube } from "@mui/icons-material";
+import {Box} from "@mui/system";
+
 
 const Logueo =(props)=>{
 
@@ -50,7 +50,8 @@ const Logueo =(props)=>{
     }
 
     return(
-        <Box sx={{backgroundColor:"#dbe9ff",
+        <Box sx={{
+        backgroundColor:"#dbe9ff",
         display:"flex",
         flexDirection:"column",
         minWidth:"300px",

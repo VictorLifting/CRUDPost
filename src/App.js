@@ -24,8 +24,8 @@ function App() {
 
 <Box sx={{display: 'flex',
             alignItems:"center",
-            justifyContent:"center",
-            backgroundColor:"#f6fff5"}}>
+            justifyContent:"center"
+            }}>
 
 {usuario ? <Home/> : <Logueo  setUsuario={setUsuario} />}
 </Box>

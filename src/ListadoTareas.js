@@ -4,8 +4,58 @@ import {Table, TableContainer, TableHead, TableCell, TableBody, TableRow, Modal,
 import DeleteIcon from '@mui/icons-material/Delete';
 import EditIcon from '@mui/icons-material/Edit';
 import { makeStyles } from '@mui/styles';
+import {app} from "./firebase-config";
 
 const baseUrl='https://waco-api.herokuapp.com/api/posts/'
+
+
+
+
+
+//obtener id del usuario registrado
+
+
+/*
+const [userId, setuserID]=useState([]);
+
+const getUId= async() => {
+
+try{  
+ 
+
+    const iniciarSesion=(correo, password)=>{
+        app.auth().signInWithEmailAndPassword(correo, password).then((usuarioFirebase)=>{
+            console.log("Id del usuario:", usuarioFirebase.id);
+            setuserID(usuarioFirebase.id)
+
+            //props.setUsuario(usuarioFirebase)
+        })
+    } 
+    iniciarSesion
+
+        const resp= await fetch(`https://waco-api.herokuapp.com/api/posts`);
+        const {data} = await resp.json();
+
+        setData(data) ;
+     
+}
+
+catch (error){
+    console.log(error)   
+}
+}    
+
+useEffect(async()=>{
+   await getUId();
+   console.log(userId)
+},[])
+
+
+
+
+*/
+
+
 
 
 const useStyles = makeStyles(() => ({
@@ -28,6 +78,10 @@ const useStyles = makeStyles(() => ({
     iconos:{
       cursor: 'pointer'
     }, 
+    tableStyle:{
+        backgroundColor: 'rgb(8, 103, 120)'
+
+    },
     inputMaterial:{
         marginBottom:'10px',
         backgroundColor:'#fff',
@@ -222,9 +276,9 @@ return( <div> ListadoTareas
 
      
 <TableContainer>
-       <Table>
-         <TableHead>
-           <TableRow>
+       <Table >
+         <TableHead className={styles.tableStyle}>
+           <TableRow >
              <TableCell>Id</TableCell>
              <TableCell>Title</TableCell>
              <TableCell>Body</TableCell>
