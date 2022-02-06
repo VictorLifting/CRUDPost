@@ -67,8 +67,7 @@ const Logueo =(props)=>{
 
                <Box sx={{
 
-                   display: "block",
-                   backgroundColor:"yellow"
+                   display: "block"
                }}>
 
               

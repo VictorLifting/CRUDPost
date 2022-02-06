@@ -1,25 +1,10 @@
 import React,{useState} from 'react';
 import Button from '@mui/material/Button';
-import { Box } from '@mui/system';
 import {Table, TableContainer, TableHead, TableCell, TableBody, TableRow, Modal, TextField} from '@mui/material/';
 import DeleteIcon from '@mui/icons-material/Delete';
 import EditIcon from '@mui/icons-material/Edit';
 import { makeStyles } from '@mui/styles';
 
-
-
-
-/*
-peticion
-
-.then(resp => resp.json())
-
-.then(data=>{console.log(resp)
-})
-
-.catch(console.warn);
-
-*/
 const baseUrl='https://waco-api.herokuapp.com/api/posts/'
 
 
@@ -78,19 +63,11 @@ const ListadoTareas = ({arrayTareas}) => {
 
 
       //CREAR
+
 const sendPosts = async () => {
     try{ 
 
 
-
-/*
-const data= {
-    title: "Title",
-    body: "Post body",
-    user_uuid: "8SDA6VDZGUjkbJBDTGgB123Ds8ENG6"
-  }
-
-*/
 
   const fetchData = {
     method: 'POST',
@@ -119,16 +96,7 @@ const data= {
 
 const updatePosts= () => {
     try{ 
-/*
 
-
-const data= {
-
-    title: "New Title",
-    body: " New body",
-
-  }
-*/
 
   const fetchData = {
     method: 'PATCH',
@@ -153,7 +121,7 @@ const data= {
 
 
 
-    //BORRARR
+    //BORRAR
 const deleteData = async ( ) =>{
     const response = await fetch(baseUrl+postSelected.id, {
         method: 'DELETE', 
@@ -168,34 +136,6 @@ const deleteData = async ( ) =>{
     console.log(data);
  };
 
-
-
-
-
-
-
-    
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-  //  sendPosts();
-
-
-    
 
 
   const abrirCerrarModalInsertar=()=>{
@@ -213,13 +153,10 @@ const deleteData = async ( ) =>{
   }
 
 
-  const seleccionarConsola=(post, caso)=>{
+  const selectPost=(post, caso)=>{
     setPostSelected(post);
     (caso==='Editar')? abrirCerrarModalEditar():abrirCerrarModalEliminar()
   }
-
-
-
 
 
 
@@ -263,7 +200,7 @@ const deleteData = async ( ) =>{
 
       const bodyEliminar=(
         <div  className={styles.modal}>
-          <p>Estás seguro que deseas eliminar la consola <b>{postSelected && postSelected.nombre}</b> ? </p>
+          <p>Estás seguro que deseas eliminar el post <b>{postSelected && postSelected.id}</b> ? </p>
           <div align="right">
             <Button  variant="outlined" color="secondary" onClick={()=>deleteData()} >Sí</Button>
             <Button variant="contained" onClick={()=>abrirCerrarModalEliminar()}>No</Button>
@@ -280,7 +217,7 @@ const deleteData = async ( ) =>{
 
 return( <div> ListadoTareas
 
-<Button variant="contained" onClick={()=>abrirCerrarModalInsertar()}>Insertar</Button>
+<Button variant="contained" onClick={()=>abrirCerrarModalInsertar()}>Add new post</Button>
 
 
      
@@ -307,9 +244,9 @@ return( <div> ListadoTareas
                <TableCell>{post.user}</TableCell>
 
                <TableCell>
-                 <EditIcon onClick={()=>seleccionarConsola(post, 'Editar')} />
+                 <EditIcon onClick={()=>selectPost(post, 'Editar')} />
                  &nbsp;&nbsp;&nbsp;
-                 <DeleteIcon onClick={()=>seleccionarConsola(post, 'Eliminar')}/>
+                 <DeleteIcon onClick={()=>selectPost(post, 'Eliminar')}/>
                  </TableCell>
 
              </TableRow>
