@@ -1,25 +1,39 @@
-import logo from './logo.svg';
-import './App.css';
+
+import React, {useEffect} from "react";
+import{app} from"./firebase-config";
+import {makeStyles, Box} from "@mui/material";
+import Home from "./Home"
+import Logueo from"./Logueo"
+
 
 function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+
+  const[ usuario, setUsuario]= React.useState(null); 
+
+  useEffect((()=>{
+    app.auth().onAuthStateChanged((usuarioFirebase)=>{
+      console.log("ya tienes sesion inciada con ", usuarioFirebase);
+      setUsuario(usuarioFirebase);
+    })
+  }) ,[])
+
+
+
+
+  return <>
+
+<Box sx={{display: 'flex',
+            alignItems:"center",
+            justifyContent:"center",
+            backgroundColor:"#f6fff5"}}>
+
+{usuario ? <Home/> : <Logueo  setUsuario={setUsuario} />}
+</Box>
+   
+
+  </>;
+
+ 
 }
 
 export default App;
