@@ -1,7 +1,6 @@
 import React, {useEffect, useState} from "react";
 import { app } from "./firebase-config";
 import Button from '@mui/material/Button';
-import AgregarTarea from "./AgregarTarea";
 import ListadoTareas from "./ListadoTareas";
 import { Box } from "@mui/material";
 
@@ -46,8 +45,6 @@ const Home =()=>{
             <hr /> 
 
             <div>
-
-            <AgregarTarea/>
 
             <hr /> 
             </div>
