@@ -6,6 +6,7 @@ import EditIcon from '@mui/icons-material/Edit';
 import { makeStyles } from '@mui/styles';
 
 
+
 const baseUrl = 'https://waco-api.herokuapp.com/api/posts'
 
 
@@ -66,7 +67,7 @@ const useStyles = makeStyles(() => ({
   },
 
   tableContainer:{
-      padding:'2em',
+      paddingTop:'2em',
       backgroundColor:'#F0F4FF',
       display:'flex',
       justifyContent:'center',
@@ -80,26 +81,18 @@ const useStyles = makeStyles(() => ({
     boxShadow: '0px 0px 20px rgba(0, 0, 0, 0.2)',
     borderRadius: '20px',
     padding:'3em',
-    marginBlock:'3em',
     width:'90%',
     
-    
-  
-
   },
   tableHeadStyle: {
     backgroundColor: '#E8EFFE;',
     borderRadius: '80px',
     fontWeight:'800',
     fontSize:'2em'
-    
-
   },
-
   rowStyle:{
     color:'#1f5fff'
   },
-
   rowStyle2:{
     color:'#8B8D92',
     backgroundColor:'white'
@@ -108,6 +101,15 @@ const useStyles = makeStyles(() => ({
     marginBottom: '10px',
     backgroundColor: '#fff',
     width: '100%'
+  },
+  bg:{
+      backgroundColor:'#F0F4FF'
+  },
+  add:{
+      display:'flex',
+      justifyContent:'flex-end',
+      paddingBlockStart:'2em',
+      paddingRight:'5em'
   }
 }));
 
@@ -336,16 +338,19 @@ const ListadoTareas = () => {
   )
 
   return (
-    <div>
-      ListadoTareas
+    <div className={styles.bg} >
+
+    <div className={styles.add}>
     <Button
       variant="contained"
       onClick={abrirCerrarModalInsertar}
     >
-      Add new post
+      + Add new post
     </Button>
+    </div>
 
     <TableContainer className={styles.tableContainer}>
+        
       <Table className={styles.tableStyle} >
         <TableHead className={styles.tableHeadStyle}>
           <TableRow  >
