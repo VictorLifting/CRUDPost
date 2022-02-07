@@ -4,48 +4,10 @@ import { Table, TableContainer, TableHead, TableCell, TableBody, TableRow, Modal
 import DeleteIcon from '@mui/icons-material/Delete';
 import EditIcon from '@mui/icons-material/Edit';
 import { makeStyles } from '@mui/styles';
-
+import { getAuth } from "firebase/auth";
 
 
 const baseUrl = 'https://waco-api.herokuapp.com/api/posts'
-
-
-
-
-
-//obtener id del usuario registrado
-
-
-/*
-const [userId, setuserID]=useState([]);
-const getUId= async() => {
-try{  
- 
-    const iniciarSesion=(correo, password)=>{
-        app.auth().signInWithEmailAndPassword(correo, password).then((usuarioFirebase)=>{
-            console.log("Id del usuario:", usuarioFirebase.id);
-            setuserID(usuarioFirebase.id)
-            //props.setUsuario(usuarioFirebase)
-        })
-    } 
-    iniciarSesion
-        const resp= await fetch(`https://waco-api.herokuapp.com/api/posts`);
-        const {data} = await resp.json();
-        setData(data) ;
-     
-}
-catch (error){
-    console.log(error)   
-}
-}    
-useEffect(async()=>{
-   await getUId();
-   console.log(userId)
-},[])
-*/
-
-
-
 
 const useStyles = makeStyles(() => ({
   modal: {
@@ -116,15 +78,43 @@ const useStyles = makeStyles(() => ({
 
 const ListadoTareas = () => {
 
+
+    const auth = getAuth();
+    const user = auth.currentUser;
+
+    const [userId, setUserId] =  useState(auth.currentUser.uid);
+
+    const getUserId =  () =>   {
+
+        try  {
+            
+            if (user !== undefined) {
+            setUserId(user.uid);
+            console.log(userId)}
+    }
+        catch (error) {
+            console.log(error)
+        }
+    }
+  
+    useEffect(() => {
+        const getId = () => {
+            getUserId();
+        }
+        getId();
+  
+    }, [])
+
+    
   const styles = useStyles();
   const [modalInsertar, setModalInsertar] = useState(false);
   const [modalEditar, setModalEditar] = useState(false);
   const [modalEliminar, setModalEliminar] = useState(false);
 
   const [postSelected, setPostSelected] = useState({
-   // id: '',
     title: '',
     body: '',
+    user_uuid: userId
   })
 
   const handleChange = (e) => {
@@ -255,13 +245,7 @@ const ListadoTareas = () => {
         onChange={handleChange}
       />
       <br />
-      <TextField
-        className={styles.inputMaterial}
-        name="user_uuid" label="userid"
-        onChange={handleChange}
-      />
-      <br />
-      <br />
+
       <div align="right">
         <Button
           variant="contained"

@@ -58,7 +58,6 @@ const Logueo = (props) => {
 
 	const iniciarSesion = (correo, password) => {
 		app.auth().signInWithEmailAndPassword(correo, password).then((usuarioFirebase) => {
-			console.log("sesion iniciada con:", usuarioFirebase.user);
 			props.setUsuario(usuarioFirebase)
 		})
 	}
