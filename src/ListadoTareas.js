@@ -64,10 +64,45 @@ const useStyles = makeStyles(() => ({
   iconos: {
     cursor: 'pointer'
   },
-  tableStyle: {
-    backgroundColor: '#E8EFFE;',
-    borderRadius: '20px'
 
+  tableContainer:{
+      padding:'2em',
+      backgroundColor:'#F0F4FF',
+      display:'flex',
+      justifyContent:'center',
+      alignItems:'center'
+
+  },
+
+
+  tableStyle:{
+
+    boxShadow: '0px 0px 20px rgba(0, 0, 0, 0.2)',
+    borderRadius: '20px',
+    padding:'3em',
+    marginBlock:'3em',
+    width:'90%',
+    
+    
+  
+
+  },
+  tableHeadStyle: {
+    backgroundColor: '#E8EFFE;',
+    borderRadius: '80px',
+    fontWeight:'800',
+    fontSize:'2em'
+    
+
+  },
+
+  rowStyle:{
+    color:'#1f5fff'
+  },
+
+  rowStyle2:{
+    color:'#8B8D92',
+    backgroundColor:'white'
   },
   inputMaterial: {
     marginBottom: '10px',
@@ -310,15 +345,16 @@ const ListadoTareas = () => {
       Add new post
     </Button>
 
-    <TableContainer>
-      <Table >
-        <TableHead className={styles.tableStyle}>
-          <TableRow >
-            <TableCell>Id</TableCell>
-            <TableCell>Title</TableCell>
-            <TableCell>Body</TableCell>
-            <TableCell>Link</TableCell>
-            <TableCell>User</TableCell>
+    <TableContainer className={styles.tableContainer}>
+      <Table className={styles.tableStyle} >
+        <TableHead className={styles.tableHeadStyle}>
+          <TableRow  >
+            <TableCell className={styles.rowStyle} >Id</TableCell>
+            <TableCell className={styles.rowStyle}>Title</TableCell>
+            <TableCell className={styles.rowStyle}>Body</TableCell>
+            <TableCell className={styles.rowStyle}>Link</TableCell>
+            <TableCell className={styles.rowStyle}>User</TableCell>
+            <TableCell className={styles.rowStyle}>Options</TableCell>
           </TableRow>
         </TableHead>
 
@@ -326,13 +362,13 @@ const ListadoTareas = () => {
           {realData.map(post => (
             <TableRow key={post.id}>
 
-              <TableCell>{post.id}</TableCell>
-              <TableCell>{post.title}</TableCell>
-              <TableCell>{post.body}</TableCell>
-              <TableCell>{post.link}</TableCell>
-              <TableCell>{post.user}</TableCell>
+              <TableCell className={styles.rowStyle2}>{post.id}</TableCell>
+              <TableCell className={styles.rowStyle2}>{post.title}</TableCell>
+              <TableCell className={styles.rowStyle2}>{post.body}</TableCell>
+              <TableCell className={styles.rowStyle2}>{post.link}</TableCell>
+              <TableCell className={styles.rowStyle2}>{post.user}</TableCell>
 
-              <TableCell>
+              <TableCell className={styles.rowStyle2} >
                 <EditIcon onClick={() => selectPost(post, 'Editar')} />
                 &nbsp;&nbsp;&nbsp;
                 <DeleteIcon onClick={() => selectPost(post, 'Eliminar')} />
