@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import Button from '@mui/material/Button';
 import { Table, TableContainer, TableHead, TableCell, TableBody, TableRow, Modal, TextField } from '@mui/material';
 import DeleteIcon from '@mui/icons-material/Delete';
@@ -74,7 +74,7 @@ const useStyles = makeStyles(() => ({
 }));
 
 
-const ListadoTareas = ({ arrayTareas }) => {
+const ListadoTareas = () => {
 
   const styles = useStyles();
   const [modalInsertar, setModalInsertar] = useState(false);
@@ -82,7 +82,7 @@ const ListadoTareas = ({ arrayTareas }) => {
   const [modalEliminar, setModalEliminar] = useState(false);
 
   const [postSelected, setPostSelected] = useState({
-    id: '',
+   // id: '',
     title: '',
     body: '',
   })
@@ -95,6 +95,31 @@ const ListadoTareas = ({ arrayTareas }) => {
     }))
     console.log(postSelected);
   }
+
+  //Pedir
+
+  const [realData, setData] = useState([]);
+  const getPosts = async () => {
+      try {
+          const resp = await fetch(`https://waco-api.herokuapp.com/api/posts`);
+          const { data } = await resp.json();
+          setData(data);
+      }
+      catch (error) {
+          console.log(error)
+      }
+  }
+
+  useEffect(() => {
+      const getAllPost = () => {
+           getPosts();
+      }
+      getAllPost();
+
+  }, [])
+
+
+
 
   //CREAR
 
@@ -117,13 +142,13 @@ const ListadoTareas = ({ arrayTareas }) => {
     catch (error) {
       console.log(error)
     }
-
+    getPosts();
     abrirCerrarModalInsertar()
   }
 
   //actualizar
 
-  const updatePosts = () => {
+  const updatePosts = async() => {
     try {
       const fetchData = {
         method: 'PATCH',
@@ -133,15 +158,17 @@ const ListadoTareas = ({ arrayTareas }) => {
         }
       }
 
-      fetch(baseUrl + "/" + postSelected.id, fetchData)
+     await fetch(baseUrl + "/" + postSelected.id, fetchData)
         .then(res => res.json())
         .catch(error => console.error('Error:', error))
         .then(response => console.log('Success:', response));
+      
 
     }
     catch (error) {
       console.log(error)
     }
+    getPosts();
     abrirCerrarModalEditar();
   }
 
@@ -155,6 +182,7 @@ const ListadoTareas = ({ arrayTareas }) => {
     });
 
     const data = await response.json();
+    getPosts();
     abrirCerrarModalEliminar();
     // now do whatever you want with the data  
     console.log(data);
@@ -174,12 +202,6 @@ const ListadoTareas = ({ arrayTareas }) => {
   const bodyInsertar = (
     <div className={styles.modal}>
       <h3>Add new post</h3>
-      <TextField
-        className={styles.inputMaterial}
-        name="id"
-        label="id"
-        onChange={handleChange}
-      />
       <br />
       <TextField
         className={styles.inputMaterial}
@@ -220,7 +242,7 @@ const ListadoTareas = ({ arrayTareas }) => {
 
   const bodyEditar = (
     <div className={styles.modal} >
-      <h3>Editar Consola</h3>
+      <h3>Editar post</h3>
       <TextField
         className={styles.inputMaterial}
         name="title" label="Title"
@@ -234,7 +256,7 @@ const ListadoTareas = ({ arrayTareas }) => {
         onChange={handleChange}
         value={postSelected && postSelected.body}
       />
-      <br />postSelected
+      <br />
       <br /><br />
       <div align="right">
         <Button
@@ -298,7 +320,7 @@ const ListadoTareas = ({ arrayTareas }) => {
         </TableHead>
 
         <TableBody>
-          {arrayTareas.map(post => (
+          {realData.map(post => (
             <TableRow key={post.id}>
 
               <TableCell>{post.id}</TableCell>
