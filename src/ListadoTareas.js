@@ -5,6 +5,7 @@ import DeleteIcon from '@mui/icons-material/Delete';
 import EditIcon from '@mui/icons-material/Edit';
 import { makeStyles } from '@mui/styles';
 
+
 const baseUrl = 'https://waco-api.herokuapp.com/api/posts'
 
 
@@ -64,7 +65,9 @@ const useStyles = makeStyles(() => ({
     cursor: 'pointer'
   },
   tableStyle: {
-    backgroundColor: 'rgb(8, 103, 120)'
+    backgroundColor: '#E8EFFE;',
+    borderRadius: '20px'
+
   },
   inputMaterial: {
     marginBottom: '10px',
